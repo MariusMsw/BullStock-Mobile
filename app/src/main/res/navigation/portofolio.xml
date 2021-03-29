@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/portofolio"
+    app:startDestination="@id/portofolioScreen">
+
+    <fragment
+        android:id="@+id/portofolioScreen"
+        android:name="com.mariusmihai.bullstock.portofolio.PortofolioFragment"
+        android:label="Portofolio Fragment"
+        tools:layout="@layout/fragment_portofolio" />
+
+</navigation>

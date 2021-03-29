@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BullStock</string>
+    <string name="trading">Trading</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="cash">Cash</string>
+    <string name="profile">Profile</string>
+    <string name="favorites">Favorites</string>
+    <string name="top_moves">Top Moves</string>
+    <string name="all_stocks">All Stocks</string>
 </resources>

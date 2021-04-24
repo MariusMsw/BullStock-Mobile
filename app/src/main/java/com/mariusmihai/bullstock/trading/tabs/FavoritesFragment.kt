@@ -1,6 +1,5 @@
 package com.mariusmihai.bullstock.trading.tabs
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment

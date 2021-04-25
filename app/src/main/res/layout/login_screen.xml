@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mariusmihai.bullstock.auth.login.LoginFragmentViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/padding_64"
+                android:src="@drawable/ic_trading"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="H, 1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.1"
+                app:layout_constraintWidth_percent="0.15" />
+            <!--TODO-->
+            <!--            android:text="@={viewModel.email}"-->
+            <EditText
+                android:id="@+id/et_email_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_64"
+                android:hint="@string/e_mail"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/padding_8"
+
+                android:textColor="#7e7e7e"
+                android:textColorHint="#7e7e7e"
+                android:theme="@android:style/Theme.Light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+            <!--            TODO-->
+            <!--            android:text="@={viewModel.password}"-->
+
+            <EditText
+                android:id="@+id/et_password_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_64"
+                android:layout_marginTop="@dimen/padding_16"
+                android:layout_marginEnd="@dimen/padding_64"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="@dimen/padding_8"
+                android:textColor="#7e7e7e"
+                android:textColorHint="#7e7e7e"
+                android:theme="@android:style/Theme.Light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_email_login" />
+            <!--TODO-->
+            <!--            android:onClick="@{() -> viewModel.login()}"-->
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_32"
+                android:background="@drawable/button_background"
+                android:paddingStart="@dimen/padding_32"
+                android:paddingEnd="@dimen/padding_32"
+                android:text="@string/login"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_password_login" />
+
+            <TextView
+                android:id="@+id/tv_dont_have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_32"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Don't have an account? Click here"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

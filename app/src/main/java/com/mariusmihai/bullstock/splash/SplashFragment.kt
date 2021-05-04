@@ -3,18 +3,18 @@ package com.mariusmihai.bullstock.splash
 import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.databinding.SplashScreenBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel;
 
 class SplashFragment : BaseFragment<SplashScreenBinding>() {
 
     override val layout: Int
         get() = R.layout.splash_screen
 
-    override val viewModel: SplashViewModel by viewModel()
+    override val viewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

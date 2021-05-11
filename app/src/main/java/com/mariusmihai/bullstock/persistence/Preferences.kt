@@ -20,17 +20,17 @@ object Preferences {
         this?.apply()
     }
 
-    fun getUserId() =
-        preferences?.getInt(AppConstants.SharedPrefKeys.ARG_USER_ID, -1);
+    fun getRefreshToken() =
+        preferences?.getString(AppConstants.SharedPrefKeys.ARG_REFRESH_TOKEN, null);
 
-    fun saveUserId(userId: Int) = with(preferences?.edit()) {
-        this?.putInt(AppConstants.SharedPrefKeys.ARG_USER_ID, userId)
+    fun saveRefreshToken(token: String) = with(preferences?.edit()) {
+        this?.putString(AppConstants.SharedPrefKeys.ARG_REFRESH_TOKEN, token)
         this?.apply()
     }
 
     fun removeSession() = with(preferences?.edit()) {
         this?.remove(AppConstants.SharedPrefKeys.ARG_BEARER_TOKEN)
-        this?.remove(AppConstants.SharedPrefKeys.ARG_USER_ID)
+        this?.remove(AppConstants.SharedPrefKeys.ARG_REFRESH_TOKEN)
         this?.apply()
     }
 }

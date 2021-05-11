@@ -5,6 +5,6 @@ object AppConstants {
 
     object SharedPrefKeys {
         const val ARG_BEARER_TOKEN = "ARG_BEARER_TOKEN"
-        const val ARG_USER_ID = "ARG_USER_ID"
+        const val ARG_REFRESH_TOKEN = "ARG_REFRESH_TOKEN"
     }
 }

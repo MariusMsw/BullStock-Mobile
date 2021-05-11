@@ -10,7 +10,7 @@ class SplashViewModel : ViewModel() {
     lateinit var navigateToTrading: () -> Unit
 
     fun navigateBasedOnAuth() {
-        when (Preferences.getUserId() != -1 && !Preferences.getBearerToken().isNullOrEmpty()) {
+        when (!Preferences.getBearerToken().isNullOrEmpty()) {
             true -> navigateToTrading.invoke()
             false -> navigateToLogin.invoke()
         }

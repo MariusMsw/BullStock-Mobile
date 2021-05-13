@@ -13,4 +13,7 @@ interface BullStockApi {
 
     @POST("auth/login")
     suspend fun login(@Body body: LoginForm): AuthResponseModel
+
+    @POST("auth/logout")
+    suspend fun logout(): Map<String, String>
 }

@@ -21,7 +21,7 @@ object BullStockApiRepository {
                     level = HttpLoggingInterceptor.Level.BODY
                 }
             })
-//            .addInterceptor(AuthInterceptor())
+            .addInterceptor(AuthInterceptor())
             .build()
 
     private val retrofitClientWithAuth = Retrofit.Builder().baseUrl("http://192.168.0.104:8080/")
@@ -29,10 +29,30 @@ object BullStockApiRepository {
         .addConverterFactory(GsonConverterFactory.create(Gson()))
         .build()
 
-    private val bullStockApi = retrofitClientWithAuth.create(BullStockApi::class.java)
+    private val okHttpClientWithoutAuth =
+        OkHttpClient()
+            .newBuilder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                if (BuildConfig.DEBUG) {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }
+            })
+            .build()
 
-    suspend fun register(registerForm: RegisterForm) = bullStockApi.register(registerForm)
+    private val retrofitClientWithoutAuth = Retrofit.Builder().baseUrl("http://192.168.0.104:8080/")
+        .client(okHttpClientWithoutAuth)
+        .addConverterFactory(GsonConverterFactory.create(Gson()))
+        .build()
 
-    suspend fun login(loginForm: LoginForm) = bullStockApi.login(loginForm)
+
+    private val bullStockApiWithoutAuth = retrofitClientWithoutAuth.create(BullStockApi::class.java)
+    private val bullStockApiWithAuth = retrofitClientWithAuth.create(BullStockApi::class.java)
+
+    suspend fun register(registerForm: RegisterForm) =
+        bullStockApiWithoutAuth.register(registerForm)
+
+    suspend fun login(loginForm: LoginForm) = bullStockApiWithoutAuth.login(loginForm)
+
+    suspend fun logout() = bullStockApiWithAuth.logout()
 
 }

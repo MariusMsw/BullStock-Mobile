@@ -1,10 +1,12 @@
 package com.mariusmihai.bullstock.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.mariusmihai.bullstock.MainActivity
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.databinding.SplashScreenBinding
@@ -24,8 +26,9 @@ class SplashFragment : BaseFragment<SplashScreenBinding>() {
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             }
 
-            navigateToTrading = {
-                findNavController().navigate(R.id.action_splashFragment_to_tradingFragment)
+            navigateToMain = {
+                startActivity(Intent(activity, MainActivity::class.java))
+                activity?.finish()
             }
         }
     }

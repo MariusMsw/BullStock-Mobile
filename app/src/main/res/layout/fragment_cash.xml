@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
             android:layout_marginVertical="128dp"
+            android:onClick="@{() -> viewModel.deposit()}"
             android:text="@string/deposit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
             android:layout_marginVertical="128dp"
+            android:text="@={viewModel.depositString}"
             android:hint="Amount"
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
             android:layout_marginVertical="64dp"
+            android:onClick="@{() -> viewModel.withdraw()}"
             android:text="Withdraw"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cash_deposit_btn" />
@@ -50,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
             android:layout_marginVertical="64dp"
+            android:text="@={viewModel.withdrawString}"
             android:hint="Amount"
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"

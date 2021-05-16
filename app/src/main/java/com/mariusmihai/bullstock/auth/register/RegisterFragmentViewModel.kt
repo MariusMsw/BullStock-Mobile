@@ -7,7 +7,6 @@ import com.mariusmihai.bullstock.core.helpers.isValidEmail
 import com.mariusmihai.bullstock.core.helpers.logError
 import com.mariusmihai.bullstock.data.dto.RegisterForm
 import com.mariusmihai.bullstock.data.repository.BullStockApiRepository
-import com.mariusmihai.bullstock.persistence.Preferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -18,39 +17,47 @@ class RegisterFragmentViewModel : BaseViewModel() {
     val password = ObservableField<String>()
     val confirmPassword = ObservableField<String>()
 
-    var navigateToTrading: (() -> Unit)? = null
     var showAlert: ((String) -> Unit)? = null
+    var navigateToLogin: (() -> Unit)? = null
 
     fun register() {
         val userEmail = email.get() ?: return
         val userPassword = password.get() ?: return
         val userConfirmPassword = confirmPassword.get() ?: return
 
-        if (userPassword != userConfirmPassword) return
-        if (!userEmail.isValidEmail()) return
+        if (userPassword != userConfirmPassword) {
+            viewModelScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    showAlert?.invoke("Passwords does not match")
+                }
+            }
+            return
+        }
+        if (!userEmail.isValidEmail()) {
+            viewModelScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    showAlert?.invoke("Email is not valid")
+                }
+            }
+            return
+        }
 
         doRegister(userEmail, userPassword, userConfirmPassword)
     }
 
-    fun doRegister(email: String, password: String, confirmPassword: String) =
+    private fun doRegister(email: String, password: String, confirmPassword: String) =
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = BullStockApiRepository.register(
+                BullStockApiRepository.register(
                     RegisterForm(
                         email = email,
                         password = password,
                         confirmPassword = confirmPassword
                     )
                 )
-                response.accessToken?.let { Preferences.saveBearerToken(it) }
-                response.refreshToken?.let { Preferences.saveRefreshToken(it) }
-
-                if (!response.accessToken.isNullOrEmpty()) {
-                    withContext(Dispatchers.Main) {
-                        navigateToTrading?.invoke()
-                    }
+                withContext(Dispatchers.Main) {
+                    navigateToLogin?.invoke()
                 }
-
             } catch (e: Exception) {
                 e.message?.logError()
                 withContext(Dispatchers.Main) {

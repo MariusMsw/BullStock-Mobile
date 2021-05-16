@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.mariusmihai.bullstock.BuildConfig
 import com.mariusmihai.bullstock.core.network.AuthInterceptor
 import com.mariusmihai.bullstock.data.BullStockApi
+import com.mariusmihai.bullstock.data.dto.CashDto
 import com.mariusmihai.bullstock.data.dto.LoginForm
 import com.mariusmihai.bullstock.data.dto.RegisterForm
 import okhttp3.OkHttpClient
@@ -54,5 +55,8 @@ object BullStockApiRepository {
     suspend fun login(loginForm: LoginForm) = bullStockApiWithoutAuth.login(loginForm)
 
     suspend fun logout() = bullStockApiWithAuth.logout()
+
+    suspend fun deposit(cashDto: CashDto) = bullStockApiWithAuth.deposit(cashDto)
+    suspend fun withdraw(cashDto: CashDto) = bullStockApiWithAuth.withdraw(cashDto)
 
 }

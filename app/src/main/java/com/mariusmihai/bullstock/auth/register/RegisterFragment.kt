@@ -1,10 +1,12 @@
 package com.mariusmihai.bullstock.auth.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mariusmihai.bullstock.R
+import com.mariusmihai.bullstock.auth.AuthenticationActivity
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.databinding.RegisterScreenBinding
 
@@ -20,6 +22,11 @@ class RegisterFragment : BaseFragment<RegisterScreenBinding>() {
 
         binding.tvAlreadyHaveAccount.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+
+        viewModel.navigateToLogin = {
+            startActivity(Intent(activity, AuthenticationActivity::class.java))
+            activity?.finish()
         }
     }
 }

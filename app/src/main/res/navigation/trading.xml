@@ -11,4 +11,13 @@
         android:label="Trading Fragment"
         tools:layout="@layout/fragment_trading" />
 
+    <fragment
+        android:id="@+id/stockScreen"
+        android:name="com.mariusmihai.bullstock.stock.StockFragment"
+        android:label="Stock Fragment"
+        tools:layout="@layout/stock_screen" />
+
+    <action
+        android:id="@+id/action_all_stocks_to_stockScreen"
+        app:destination="@+id/stockScreen" />
 </navigation>

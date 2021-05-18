@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
-            android:layout_marginVertical="256dp"
-            android:background="@android:color/holo_red_light"
+            android:layout_marginVertical="128dp"
+            android:backgroundTint="@android:color/holo_red_light"
             android:text="SELL"
             android:textColor="@android:color/white"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
-            android:layout_marginTop="256dp"
-            android:background="@android:color/holo_green_light"
+            android:layout_marginTop="128dp"
+            android:backgroundTint="@android:color/holo_green_light"
             android:text="BUY"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +71,31 @@
             app:layout_constraintTop_toBottomOf="@+id/sell_btn" />
 
         <TextView
+            android:id="@+id/order_value_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="64dp"
+            android:layout_marginVertical="32dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="32dp"
+            android:text="Order value"
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stock_price_key" />
+
+        <TextView
+            android:id="@+id/order_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="64dp"
+            android:layout_marginVertical="32dp"
+            android:layout_marginTop="32dp"
+            android:text="0"
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stock_price_key" />
+
+        <TextView
             android:id="@+id/stock_price_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,30 +111,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
-            android:layout_marginVertical="64dp"
+            android:layout_marginVertical="32dp"
             android:text="Shares owned"
             android:textSize="@dimen/text_size_16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stock_price_key" />
+            app:layout_constraintTop_toBottomOf="@+id/order_value_key" />
 
         <TextView
             android:id="@+id/shares_owned_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
-            android:layout_marginVertical="64dp"
+            android:layout_marginVertical="32dp"
             android:text="0"
             android:textSize="@dimen/text_size_16"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stock_price_key" />
+            app:layout_constraintTop_toBottomOf="@+id/order_value" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="16dp"
+            android:text="Back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Back"
             app:layout_constraintStart_toStartOf="parent" />
 
 

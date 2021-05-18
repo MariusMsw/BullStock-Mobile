@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.data.dto.TradingStockDto
 import com.mariusmihai.bullstock.databinding.FragmentAllStocksBinding
 import com.mariusmihai.bullstock.trading.adapters.StocksAdapter
+
 
 class AllStocksFragment : BaseFragment<FragmentAllStocksBinding>() {
     override val layout: Int
@@ -35,5 +37,12 @@ class AllStocksFragment : BaseFragment<FragmentAllStocksBinding>() {
             findNavController().navigate(R.id.action_all_stocks_to_stockScreen)
         }
         binding.recyclerViewAllStocks.adapter = adapter
+        binding.recyclerViewAllStocks.addItemDecoration(
+            DividerItemDecoration(
+                binding.recyclerViewAllStocks.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
     }
 }

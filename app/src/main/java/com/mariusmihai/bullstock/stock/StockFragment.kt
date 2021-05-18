@@ -17,5 +17,6 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
         super.onCreate(savedInstanceState)
 
 
+
     }
 }

@@ -4,8 +4,8 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.viewModelScope
 import com.mariusmihai.bullstock.core.BaseViewModel
 import com.mariusmihai.bullstock.core.helpers.isValidEmail
-import com.mariusmihai.bullstock.core.helpers.logError
-import com.mariusmihai.bullstock.data.dto.RegisterForm
+import com.mariusmihai.bullstock.core.helpers.printMessage
+import com.mariusmihai.bullstock.data.dto.auth.RegisterForm
 import com.mariusmihai.bullstock.data.repository.BullStockApiRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,7 +59,7 @@ class RegisterFragmentViewModel : BaseViewModel() {
                     navigateToLogin?.invoke()
                 }
             } catch (e: Exception) {
-                e.message?.logError()
+                e.message?.printMessage()
                 withContext(Dispatchers.Main) {
                     showAlert?.invoke("An error has occurred. Please try again later.")
                 }

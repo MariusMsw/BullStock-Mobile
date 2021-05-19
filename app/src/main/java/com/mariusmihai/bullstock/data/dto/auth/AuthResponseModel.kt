@@ -1,4 +1,4 @@
-package com.mariusmihai.bullstock.data.dto
+package com.mariusmihai.bullstock.data.dto.auth
 
 import com.google.gson.annotations.SerializedName
 

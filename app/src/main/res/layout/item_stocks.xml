@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.mariusmihai.bullstock.data.dto.TradingStockDto" />
+            type="com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

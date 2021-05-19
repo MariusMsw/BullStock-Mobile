@@ -5,8 +5,9 @@ import com.mariusmihai.bullstock.BuildConfig
 import com.mariusmihai.bullstock.core.network.AuthInterceptor
 import com.mariusmihai.bullstock.data.BullStockApi
 import com.mariusmihai.bullstock.data.dto.CashDto
-import com.mariusmihai.bullstock.data.dto.LoginForm
-import com.mariusmihai.bullstock.data.dto.RegisterForm
+import com.mariusmihai.bullstock.data.dto.auth.LoginForm
+import com.mariusmihai.bullstock.data.dto.auth.RegisterForm
+import com.mariusmihai.bullstock.data.dto.stocks.StockChartRequest
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -58,5 +59,8 @@ object BullStockApiRepository {
 
     suspend fun deposit(cashDto: CashDto) = bullStockApiWithAuth.deposit(cashDto)
     suspend fun withdraw(cashDto: CashDto) = bullStockApiWithAuth.withdraw(cashDto)
+
+    suspend fun getAllStocks() = bullStockApiWithAuth.getAllStocks()
+    suspend fun getStockScreen(request: StockChartRequest) = bullStockApiWithAuth.getStockScreen(request)
 
 }

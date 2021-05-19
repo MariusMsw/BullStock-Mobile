@@ -2,7 +2,7 @@ package com.mariusmihai.bullstock.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mariusmihai.bullstock.core.helpers.logError
+import com.mariusmihai.bullstock.core.helpers.printMessage
 import com.mariusmihai.bullstock.data.repository.BullStockApiRepository
 import com.mariusmihai.bullstock.persistence.Preferences
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ class ProfileFragmentViewModel : ViewModel() {
                     navigateToLogin?.invoke()
                 }
             } catch (e: Exception) {
-                e.message?.logError()
+                e.message?.printMessage()
                 withContext(Dispatchers.Main) {
                     showAlert?.invoke("An error has occurred. Please try again later.")
                 }

@@ -1,9 +1,12 @@
 package com.mariusmihai.bullstock.data
 
-import com.mariusmihai.bullstock.data.dto.AuthResponseModel
+import com.mariusmihai.bullstock.data.dto.auth.AuthResponseModel
 import com.mariusmihai.bullstock.data.dto.CashDto
-import com.mariusmihai.bullstock.data.dto.LoginForm
-import com.mariusmihai.bullstock.data.dto.RegisterForm
+import com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto
+import com.mariusmihai.bullstock.data.dto.auth.LoginForm
+import com.mariusmihai.bullstock.data.dto.auth.RegisterForm
+import com.mariusmihai.bullstock.data.dto.stocks.StockChartRequest
+import com.mariusmihai.bullstock.data.dto.stocks.StockScreenDto
 import retrofit2.http.*
 
 interface BullStockApi {
@@ -24,4 +27,11 @@ interface BullStockApi {
 
     @POST("user/withdraw")
     suspend fun withdraw(@Body cashDto: CashDto): Map<String, String>
+
+    // ******* Stocks *******
+    @GET("stock")
+    suspend fun getAllStocks(): MutableList<StockMostImportantDataDto>
+
+    @POST("stock/screen")
+    suspend fun getStockScreen(@Body request: StockChartRequest): StockScreenDto
 }

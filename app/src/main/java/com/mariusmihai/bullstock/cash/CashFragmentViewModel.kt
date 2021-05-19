@@ -1,10 +1,9 @@
 package com.mariusmihai.bullstock.cash
 
-import android.widget.EditText
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mariusmihai.bullstock.core.helpers.logError
+import com.mariusmihai.bullstock.core.helpers.printMessage
 import com.mariusmihai.bullstock.data.dto.CashDto
 import com.mariusmihai.bullstock.data.repository.BullStockApiRepository
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +30,7 @@ class CashFragmentViewModel : ViewModel() {
                                 )
                             )
                         } catch (e: Exception) {
-                            e.message?.logError()
+                            e.message?.printMessage()
                             withContext(Dispatchers.Main) {
                                 showAlert?.invoke("An error has occurred. Please try again later.")
                             }
@@ -56,7 +55,7 @@ class CashFragmentViewModel : ViewModel() {
                                 )
                             )
                         } catch (e: Exception) {
-                            e.message?.logError()
+                            e.message?.printMessage()
                             withContext(Dispatchers.Main) {
                                 showAlert?.invoke("An error has occurred. Please try again later.")
                             }

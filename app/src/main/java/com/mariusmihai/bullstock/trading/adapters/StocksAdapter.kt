@@ -5,21 +5,21 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mariusmihai.bullstock.R
-import com.mariusmihai.bullstock.data.dto.TradingStockDto
+import com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto
 import com.mariusmihai.bullstock.databinding.ItemStocksBinding
 
-class StocksAdapter(private val items: List<TradingStockDto>) :
+class StocksAdapter(val items: MutableList<StockMostImportantDataDto>) :
     RecyclerView.Adapter<StocksAdapter.StockViewHolder>() {
 
-    var onStockClick: (() -> Unit)? = null
+    var onStockClick: ((StockMostImportantDataDto) -> Unit)? = null
 
     inner class StockViewHolder(private val binding: ItemStocksBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        public fun bind(model: TradingStockDto) {
+        public fun bind(model: StockMostImportantDataDto) {
             binding.model = model
             binding.itemStocksConstraintLayout.setOnClickListener {
-                onStockClick?.invoke()
+                onStockClick?.invoke(model)
             }
         }
     }

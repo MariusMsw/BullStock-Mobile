@@ -15,7 +15,12 @@
         android:id="@+id/stockScreen"
         android:name="com.mariusmihai.bullstock.stock.StockFragment"
         android:label="Stock Fragment"
-        tools:layout="@layout/stock_screen" />
+        tools:layout="@layout/stock_screen">
+        <argument
+            android:name="stock_details"
+            app:argType="com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto" />
+    </fragment>
+
 
     <action
         android:id="@+id/action_all_stocks_to_stockScreen"

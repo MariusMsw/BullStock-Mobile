@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.mariusmihai.bullstock.ActivityMainViewModel" />
     </data>
 
     <LinearLayout
@@ -16,10 +19,9 @@
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_dark">
 
-            <androidx.constraintlayout.motion.widget.MotionLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutDescription="@xml/swipe_scene">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/portfolio_value_key"
@@ -34,9 +36,9 @@
                     android:id="@+id/portfolio_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
                     android:paddingHorizontal="16dp"
-                    android:text="0"
+                    android:paddingTop="16dp"
+                    android:text="@{viewModel.portfolioValue}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,16 +56,16 @@
                     android:id="@+id/balance_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
-                    android:paddingHorizontal="16dp"
-                    android:text="0"
+                    android:text="@{viewModel.balance}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/portfolio_value" />
 
 
-            </androidx.constraintlayout.motion.widget.MotionLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.Toolbar>
 

@@ -62,5 +62,6 @@ object BullStockApiRepository {
 
     suspend fun getAllStocks() = bullStockApiWithAuth.getAllStocks()
     suspend fun getStockScreen(request: StockChartRequest) = bullStockApiWithAuth.getStockScreen(request)
+    suspend fun getPortfolioMetadata() = bullStockApiWithAuth.getPortfolioMetadata()
 
 }

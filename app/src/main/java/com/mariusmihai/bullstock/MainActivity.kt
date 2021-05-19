@@ -2,23 +2,38 @@ package com.mariusmihai.bullstock
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mariusmihai.bullstock.core.navigation.setupWithNavController
+import com.mariusmihai.bullstock.databinding.ActivityMainBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
 
+    private val viewModel: ActivityMainViewModel by viewModels()
+    private lateinit var bindingUtil: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        bindingUtil = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        bindingUtil.viewModel = viewModel
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
+        lifecycleScope.launch {
+            while (true) {
+                viewModel.retrievePortfolioMetadata()
+                delay(5000)
+            }
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

@@ -5,6 +5,7 @@ import com.mariusmihai.bullstock.data.dto.CashDto
 import com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto
 import com.mariusmihai.bullstock.data.dto.auth.LoginForm
 import com.mariusmihai.bullstock.data.dto.auth.RegisterForm
+import com.mariusmihai.bullstock.data.dto.stocks.PortfolioMetadataDto
 import com.mariusmihai.bullstock.data.dto.stocks.StockChartRequest
 import com.mariusmihai.bullstock.data.dto.stocks.StockScreenDto
 import retrofit2.http.*
@@ -34,4 +35,7 @@ interface BullStockApi {
 
     @POST("stock/screen")
     suspend fun getStockScreen(@Body request: StockChartRequest): StockScreenDto
+
+    @GET("user/portfolio-metadata")
+    suspend fun getPortfolioMetadata(): PortfolioMetadataDto
 }

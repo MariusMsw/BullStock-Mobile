@@ -24,6 +24,7 @@
             android:background="@android:color/holo_green_light"
             android:gravity="center"
             android:padding="8dp"
+            android:text="@{model.symbol}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/change_last_day_winners_tv"
             app:layout_constraintStart_toStartOf="parent"

@@ -25,4 +25,10 @@
     <action
         android:id="@+id/action_all_stocks_to_stockScreen"
         app:destination="@+id/stockScreen" />
+    <action
+        android:id="@+id/action_favorite_stocks_to_stockScreen"
+        app:destination="@+id/stockScreen" />
+    <action
+        android:id="@+id/action_top_moves_to_stockScreen"
+        app:destination="@+id/stockScreen" />
 </navigation>

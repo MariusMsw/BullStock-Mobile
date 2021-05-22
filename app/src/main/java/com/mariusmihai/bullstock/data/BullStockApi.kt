@@ -33,9 +33,18 @@ interface BullStockApi {
     @GET("stock")
     suspend fun getAllStocks(): MutableList<StockMostImportantDataDto>
 
+    @GET("user/favorite")
+    suspend fun getFavoriteStocks(): MutableList<StockMostImportantDataDto>
+
     @POST("stock/screen")
     suspend fun getStockScreen(@Body request: StockChartRequest): StockScreenDto
 
     @GET("user/portfolio-metadata")
     suspend fun getPortfolioMetadata(): PortfolioMetadataDto
+
+    @GET("stock/winners")
+    suspend fun getWinners(): List<StockMostImportantDataDto>
+
+    @GET("stock/losers")
+    suspend fun getLosers(): List<StockMostImportantDataDto>
 }

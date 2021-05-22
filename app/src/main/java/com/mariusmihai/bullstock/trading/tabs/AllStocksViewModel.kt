@@ -26,6 +26,4 @@ class AllStocksViewModel : ViewModel() {
                 }
             }
         }
-
-    fun getAllStocks() = stockMostImportantData
 }

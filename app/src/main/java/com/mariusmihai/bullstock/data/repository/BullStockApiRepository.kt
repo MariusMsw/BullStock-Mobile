@@ -61,7 +61,14 @@ object BullStockApiRepository {
     suspend fun withdraw(cashDto: CashDto) = bullStockApiWithAuth.withdraw(cashDto)
 
     suspend fun getAllStocks() = bullStockApiWithAuth.getAllStocks()
-    suspend fun getStockScreen(request: StockChartRequest) = bullStockApiWithAuth.getStockScreen(request)
+    suspend fun getFavoriteStocks() = bullStockApiWithAuth.getFavoriteStocks()
+
+    suspend fun getStockScreen(request: StockChartRequest) =
+        bullStockApiWithAuth.getStockScreen(request)
+
     suspend fun getPortfolioMetadata() = bullStockApiWithAuth.getPortfolioMetadata()
+
+    suspend fun getWinners() = bullStockApiWithAuth.getWinners()
+    suspend fun getLosers() = bullStockApiWithAuth.getLosers()
 
 }

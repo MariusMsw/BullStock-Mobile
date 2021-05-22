@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.databinding.FragmentAllStocksBinding
 import com.mariusmihai.bullstock.trading.adapters.StocksAdapter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AllStocksFragment : BaseFragment<FragmentAllStocksBinding>() {
     override val layout: Int
@@ -26,7 +29,12 @@ class AllStocksFragment : BaseFragment<FragmentAllStocksBinding>() {
             mutableListOf()
         )
 
-        viewModel.retrieveAllStocks()
+        lifecycleScope.launch {
+            while (true) {
+                viewModel.retrieveAllStocks()
+                delay(5000)
+            }
+        }
 
         viewModel.stockMostImportantData.observe(viewLifecycleOwner, {
             adapter.items.clear()
@@ -35,7 +43,10 @@ class AllStocksFragment : BaseFragment<FragmentAllStocksBinding>() {
         })
 
         adapter.onStockClick = {
-            findNavController().navigate(R.id.action_all_stocks_to_stockScreen, bundleOf("stock_details" to it))
+            findNavController().navigate(
+                R.id.action_all_stocks_to_stockScreen,
+                bundleOf("stock_details" to it)
+            )
         }
         binding.recyclerViewAllStocks.adapter = adapter
         binding.recyclerViewAllStocks.addItemDecoration(

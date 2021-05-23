@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.mariusmihai.bullstock.data.dto.stocks.HistoryDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/history_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--FIRST ROW-->
+
+        <TextView
+            android:id="@+id/history_symbol_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Symbol"
+            app:layout_constraintEnd_toStartOf="@+id/history_transaction_type_key"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/history_transaction_type_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Type"
+            app:layout_constraintEnd_toEndOf="@id/history_profit_key"
+            app:layout_constraintStart_toEndOf="@id/history_symbol_key"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/history_profit_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Profit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/history_transaction_type_key"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/history_symbol_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{model.symbol}"
+            app:layout_constraintEnd_toStartOf="@+id/history_transaction_type_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/history_symbol_key"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/history_transaction_type_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{model.type.toString()}"
+            app:layout_constraintEnd_toEndOf="@id/history_profit_value"
+            app:layout_constraintStart_toEndOf="@id/history_symbol_value"
+            app:layout_constraintTop_toBottomOf="@id/history_transaction_type_key"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/history_profit_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{model.symbol}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/history_transaction_type_value"
+            app:layout_constraintTop_toBottomOf="@id/history_profit_key"
+            tools:text="@tools:sample/lorem" />
+
+        <!--SECOND ROW-->
+
+        <TextView
+            android:id="@+id/history_volume_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Volume"
+            app:layout_constraintEnd_toStartOf="@+id/history_open_date_key"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/history_symbol_value" />
+
+        <TextView
+            android:id="@+id/history_open_date_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Open date"
+            app:layout_constraintEnd_toStartOf="@id/history_open_price_key"
+            app:layout_constraintStart_toEndOf="@id/history_symbol_key"
+            app:layout_constraintTop_toBottomOf="@id/history_transaction_type_value" />
+
+        <TextView
+            android:id="@+id/history_open_price_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Open price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/history_open_date_key"
+            app:layout_constraintTop_toBottomOf="@id/history_profit_value" />
+
+        <TextView
+            android:id="@+id/history_volume_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{model.volume}"
+            app:layout_constraintEnd_toStartOf="@+id/history_open_date_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/history_volume_key"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/history_open_date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{String.valueOf(model.openDate)}"
+            app:layout_constraintEnd_toEndOf="@id/history_profit_value"
+            app:layout_constraintStart_toEndOf="@id/history_symbol_value"
+            app:layout_constraintTop_toBottomOf="@id/history_open_date_key"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/history_open_price_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{String.valueOf(model.openPrice)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/history_open_date_value"
+            app:layout_constraintTop_toBottomOf="@id/history_open_price_key"
+            tools:text="@tools:sample/lorem" />
+
+        <!--THIRD ROW-->
+
+        <TextView
+            android:id="@+id/history_transaction_id_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Transaction id"
+            app:layout_constraintEnd_toStartOf="@+id/history_close_date_key"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/history_volume_value" />
+
+        <TextView
+            android:id="@+id/history_close_date_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Close date"
+            app:layout_constraintEnd_toStartOf="@id/history_close_price_key"
+            app:layout_constraintStart_toEndOf="@id/history_transaction_id_key"
+            app:layout_constraintTop_toBottomOf="@id/history_open_date_value" />
+
+        <TextView
+            android:id="@+id/history_close_price_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="Close price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/history_close_date_key"
+            app:layout_constraintTop_toBottomOf="@id/history_open_price_value" />
+
+        <TextView
+            android:id="@+id/history_transaction_id_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{model.transactionId}"
+            app:layout_constraintEnd_toStartOf="@+id/history_close_date_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/history_transaction_id_key"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/history_close_date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{String.valueOf(model.closeDate)}"
+            app:layout_constraintEnd_toStartOf="@id/history_close_price_value"
+            app:layout_constraintStart_toEndOf="@id/history_transaction_id_value"
+            app:layout_constraintTop_toBottomOf="@id/history_close_date_key"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/history_close_price_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:text="@{String.valueOf(model.closePrice)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/history_close_date_value"
+            app:layout_constraintTop_toBottomOf="@id/history_close_price_key"
+            tools:text="@tools:sample/lorem" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

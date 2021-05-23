@@ -2,12 +2,9 @@ package com.mariusmihai.bullstock.data
 
 import com.mariusmihai.bullstock.data.dto.auth.AuthResponseModel
 import com.mariusmihai.bullstock.data.dto.CashDto
-import com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto
 import com.mariusmihai.bullstock.data.dto.auth.LoginForm
 import com.mariusmihai.bullstock.data.dto.auth.RegisterForm
-import com.mariusmihai.bullstock.data.dto.stocks.PortfolioMetadataDto
-import com.mariusmihai.bullstock.data.dto.stocks.StockChartRequest
-import com.mariusmihai.bullstock.data.dto.stocks.StockScreenDto
+import com.mariusmihai.bullstock.data.dto.stocks.*
 import retrofit2.http.*
 
 interface BullStockApi {
@@ -38,6 +35,9 @@ interface BullStockApi {
 
     @POST("user/favorite/{symbol}")
     suspend fun changeFavoriteStatus(@Path("symbol") symbol: String): Map<String, String>
+
+    @GET("/user/history")
+    suspend fun retrieveHistory(): MutableList<HistoryDto>
 
     // ******* Stocks *******
     @GET("stock")

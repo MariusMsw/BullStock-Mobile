@@ -28,6 +28,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.btnLogout.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
+        binding.historyBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_historyFragment)
+
+        }
 
         viewModel.showAlert = { message ->
             context?.showAlertDialog(
@@ -40,6 +44,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         viewModel.navigateToLogin = {
             startActivity(Intent(activity, AuthenticationActivity::class.java))
             activity?.finish()
+        }
+
+        viewModel.navigateToHistory = {
+            findNavController().navigate(R.id.action_profileFragment_to_historyFragment)
         }
     }
 }

@@ -74,6 +74,13 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.mariusmihai.bullstock.profile.history.HistoryFragment"
+        android:label="HistoryFragment">
+    </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.mariusmihai.bullstock.profile.ProfileFragment"
@@ -84,5 +91,12 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/profileFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:popUpTo="@id/profileFragment"
+
+            app:popUpToInclusive="true" />
     </fragment>
+
 </navigation>

@@ -45,9 +45,5 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             startActivity(Intent(activity, AuthenticationActivity::class.java))
             activity?.finish()
         }
-
-        viewModel.navigateToHistory = {
-            findNavController().navigate(R.id.action_profileFragment_to_historyFragment)
-        }
     }
 }

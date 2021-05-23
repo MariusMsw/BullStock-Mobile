@@ -13,7 +13,6 @@ class ProfileFragmentViewModel : ViewModel() {
 
     var showAlert: ((String) -> Unit)? = null
     var navigateToLogin: (() -> Unit)? = null
-    var navigateToHistory: (() -> Unit)? = null
 
     fun doLogout() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -28,14 +27,6 @@ class ProfileFragmentViewModel : ViewModel() {
                 withContext(Dispatchers.Main) {
                     showAlert?.invoke("An error has occurred. Please try again later.")
                 }
-            }
-        }
-    }
-
-    fun goToHistory() {
-        viewModelScope.launch {
-            withContext(Dispatchers.Main) {
-                navigateToHistory?.invoke()
             }
         }
     }

@@ -20,7 +20,8 @@ class HistoryFragmentViewModel : ViewModel() {
     fun retrieveHistory() =
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                historyDto.postValue(BullStockApiRepository.retrieveHistory())
+                val response = BullStockApiRepository.retrieveHistory()
+                historyDto.postValue(response)
             } catch (e: Exception) {
                 e.message?.printMessage()
                 withContext(Dispatchers.Main) {

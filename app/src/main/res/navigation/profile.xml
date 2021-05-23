@@ -9,6 +9,21 @@
         android:id="@+id/profileScreen"
         android:name="com.mariusmihai.bullstock.profile.ProfileFragment"
         android:label="Profile Fragment"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profileFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:popUpTo="@id/profileFragment"
+
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.mariusmihai.bullstock.profile.history.HistoryFragment"
+        android:label="HistoryFragment">
+    </fragment>
 
 </navigation>

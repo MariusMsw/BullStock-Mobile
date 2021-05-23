@@ -10,7 +10,6 @@ class HistoryDto(
     val type: TransactionType,
     val profit: Double,
     val volume: Int,
-    val userId: Int,
     val openDate: Long,
     val openPrice: Double,
     val transactionId: Int,

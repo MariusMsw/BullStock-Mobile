@@ -71,4 +71,6 @@ object BullStockApiRepository {
     suspend fun getWinners() = bullStockApiWithAuth.getWinners()
     suspend fun getLosers() = bullStockApiWithAuth.getLosers()
 
+    suspend fun changeFavoriteStatus(symbol: String) =
+        bullStockApiWithAuth.changeFavoriteStatus(symbol)
 }

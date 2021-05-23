@@ -1,7 +1,6 @@
 package com.mariusmihai.bullstock.stock
 
 import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mariusmihai.bullstock.core.helpers.StockChartPeriod
@@ -9,7 +8,6 @@ import com.mariusmihai.bullstock.core.helpers.printMessage
 import com.mariusmihai.bullstock.data.dto.stocks.StockChartRequest
 import com.mariusmihai.bullstock.data.dto.stocks.StockChartResponse
 import com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto
-import com.mariusmihai.bullstock.data.dto.stocks.StockScreenDto
 import com.mariusmihai.bullstock.data.repository.BullStockApiRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,6 +50,20 @@ class StockViewModel : ViewModel() {
                 }
             }
         }
+
+    fun changeFavoriteStatus() {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                BullStockApiRepository.changeFavoriteStatus(stock.symbol)
+            } catch (e: Exception) {
+                e.message?.printMessage()
+                withContext(Dispatchers.Main) {
+                    showAlert?.invoke("An error has occurred. Please try again later.")
+                }
+            }
+        }
+    }
 
     fun buy() {
 

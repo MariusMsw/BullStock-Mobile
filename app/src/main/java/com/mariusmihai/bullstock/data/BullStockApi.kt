@@ -29,18 +29,22 @@ interface BullStockApi {
     @POST("user/withdraw")
     suspend fun withdraw(@Body cashDto: CashDto): Map<String, String>
 
+    // ******* USER *******
+    @GET("user/favorite")
+    suspend fun getFavoriteStocks(): MutableList<StockMostImportantDataDto>
+
+    @GET("user/portfolio-metadata")
+    suspend fun getPortfolioMetadata(): PortfolioMetadataDto
+
+    @POST("user/favorite/{symbol}")
+    suspend fun changeFavoriteStatus(@Path("symbol") symbol: String): Map<String, String>
+
     // ******* Stocks *******
     @GET("stock")
     suspend fun getAllStocks(): MutableList<StockMostImportantDataDto>
 
-    @GET("user/favorite")
-    suspend fun getFavoriteStocks(): MutableList<StockMostImportantDataDto>
-
     @POST("stock/screen")
     suspend fun getStockScreen(@Body request: StockChartRequest): StockScreenDto
-
-    @GET("user/portfolio-metadata")
-    suspend fun getPortfolioMetadata(): PortfolioMetadataDto
 
     @GET("stock/winners")
     suspend fun getWinners(): List<StockMostImportantDataDto>

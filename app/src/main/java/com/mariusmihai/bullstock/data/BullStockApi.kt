@@ -39,6 +39,9 @@ interface BullStockApi {
     @GET("/user/history")
     suspend fun retrieveHistory(): MutableList<HistoryDto>
 
+    @GET("/user/portofolio")
+    suspend fun getPortfolioScreen(): MutableList<PortfolioScreenDto>
+
     // ******* Stocks *******
     @GET("stock")
     suspend fun getAllStocks(): MutableList<StockMostImportantDataDto>
@@ -51,4 +54,5 @@ interface BullStockApi {
 
     @GET("stock/losers")
     suspend fun getLosers(): List<StockMostImportantDataDto>
+
 }

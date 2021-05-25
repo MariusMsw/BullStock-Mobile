@@ -9,6 +9,20 @@
         android:id="@+id/portofolioScreen"
         android:name="com.mariusmihai.bullstock.portofolio.PortofolioFragment"
         android:label="Portofolio Fragment"
-        tools:layout="@layout/fragment_portofolio" />
+        tools:layout="@layout/fragment_portofolio">
+        <action
+            android:id="@+id/action_portfolioScreen_to_stockScreen"
+            app:destination="@+id/stockScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/stockScreen"
+        android:name="com.mariusmihai.bullstock.stock.StockFragment"
+        android:label="Stock Fragment"
+        tools:layout="@layout/stock_screen">
+        <argument
+            android:name="stock_details"
+            app:argType="com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto" />
+    </fragment>
 
 </navigation>

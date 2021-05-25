@@ -28,7 +28,6 @@ class StockViewModel : ViewModel() {
 
     var showAlert: ((String) -> Unit)? = null
 
-
     lateinit var navigateToTrading: () -> Unit
 
     fun retrieveStockData() =

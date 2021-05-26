@@ -26,7 +26,7 @@ object BullStockApiRepository {
             .addInterceptor(AuthInterceptor())
             .build()
 
-    private val retrofitClientWithAuth = Retrofit.Builder().baseUrl("http://192.168.0.105:8080/")
+    private val retrofitClientWithAuth = Retrofit.Builder().baseUrl("http://192.168.0.106:8080/")
         .client(okHttpClientWithAuth)
         .addConverterFactory(GsonConverterFactory.create(Gson()))
         .build()
@@ -41,7 +41,7 @@ object BullStockApiRepository {
             })
             .build()
 
-    private val retrofitClientWithoutAuth = Retrofit.Builder().baseUrl("http://192.168.0.105:8080/")
+    private val retrofitClientWithoutAuth = Retrofit.Builder().baseUrl("http://192.168.0.106:8080/")
         .client(okHttpClientWithoutAuth)
         .addConverterFactory(GsonConverterFactory.create(Gson()))
         .build()

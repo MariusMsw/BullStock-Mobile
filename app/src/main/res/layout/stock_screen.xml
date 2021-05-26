@@ -49,12 +49,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/stock_chart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="128dp"
-            android:text="Chart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.35"
+            android:layout_marginTop="@dimen/padding_64"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
-            android:layout_marginVertical="128dp"
+            android:layout_marginVertical="32dp"
             android:backgroundTint="@android:color/holo_red_light"
             android:onClick="@{() -> viewModel.sell()}"
             android:text="SELL"
@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="64dp"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="@dimen/padding_32"
             android:backgroundTint="@android:color/holo_green_light"
             android:onClick="@{() -> viewModel.buy()}"
             android:text="BUY"

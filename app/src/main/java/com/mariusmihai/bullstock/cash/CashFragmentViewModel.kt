@@ -46,19 +46,17 @@ class CashFragmentViewModel : ViewModel() {
             val value = withdrawString.get()?.toDouble()
             //TODO banii userului
             if (value != null) {
-                if (value <= 1000) {
-                    viewModelScope.launch(Dispatchers.IO) {
-                        try {
-                            BullStockApiRepository.withdraw(
-                                CashDto(
-                                    amount = value
-                                )
+                viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        BullStockApiRepository.withdraw(
+                            CashDto(
+                                amount = value
                             )
-                        } catch (e: Exception) {
-                            e.message?.printMessage()
-                            withContext(Dispatchers.Main) {
-                                showAlert?.invoke("An error has occurred. Please try again later.")
-                            }
+                        )
+                    } catch (e: Exception) {
+                        e.message?.printMessage()
+                        withContext(Dispatchers.Main) {
+                            showAlert?.invoke("An error has occurred. Please try again later.")
                         }
                     }
                 }

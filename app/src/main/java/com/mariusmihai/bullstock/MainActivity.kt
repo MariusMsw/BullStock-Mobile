@@ -11,8 +11,10 @@ import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mariusmihai.bullstock.core.navigation.setupWithNavController
 import com.mariusmihai.bullstock.databinding.ActivityMainBinding
+import io.reactivex.Observable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,10 +31,11 @@ class MainActivity : AppCompatActivity() {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
         lifecycleScope.launch {
-            while (true) {
-                viewModel.retrievePortfolioMetadata()
-                delay(5000)
-            }
+            viewModel.retrievePortfolioMetadata()
+            Observable.interval(5000, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    viewModel.retrievePortfolioMetadata()
+                }
         }
     }
 

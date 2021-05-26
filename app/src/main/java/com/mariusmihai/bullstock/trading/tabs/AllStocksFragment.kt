@@ -11,8 +11,10 @@ import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.databinding.FragmentAllStocksBinding
 import com.mariusmihai.bullstock.trading.adapters.StocksAdapter
+import io.reactivex.Observable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class AllStocksFragment : BaseFragment<FragmentAllStocksBinding>() {
     override val layout: Int
@@ -30,10 +32,11 @@ class AllStocksFragment : BaseFragment<FragmentAllStocksBinding>() {
         )
 
         lifecycleScope.launch {
-            while (true) {
-                viewModel.retrieveAllStocks()
-                delay(5000)
-            }
+            viewModel.retrieveAllStocks()
+            Observable.interval(5000, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    viewModel.retrieveAllStocks()
+                }
         }
 
         viewModel.stockMostImportantData.observe(viewLifecycleOwner, {

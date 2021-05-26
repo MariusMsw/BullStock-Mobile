@@ -11,8 +11,12 @@ import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.databinding.FragmentFavoritesBinding
 import com.mariusmihai.bullstock.trading.adapters.StocksAdapter
+import io.reactivex.Observable
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.util.concurrent.TimeUnit
 
 class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>() {
     override val layout: Int
@@ -28,12 +32,12 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>() {
         adapter = StocksAdapter(
             mutableListOf()
         )
-
         lifecycleScope.launch {
-            while (true) {
-                viewModel.retrieveFavoriteStocks()
-                delay(5000)
-            }
+            viewModel.retrieveFavoriteStocks()
+            Observable.interval(5000, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    viewModel.retrieveFavoriteStocks()
+                }
         }
 
         viewModel.stockMostImportantData.observe(viewLifecycleOwner, {

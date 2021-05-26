@@ -11,8 +11,10 @@ import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto
 import com.mariusmihai.bullstock.databinding.FragmentPortofolioBinding
+import io.reactivex.Observable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class PortofolioFragment : BaseFragment<FragmentPortofolioBinding>() {
     override val layout: Int
@@ -30,10 +32,11 @@ class PortofolioFragment : BaseFragment<FragmentPortofolioBinding>() {
         )
 
         lifecycleScope.launch {
-            while (true) {
-                viewModel.retrievePortfolioScreen()
-                delay(5000)
-            }
+            viewModel.retrievePortfolioScreen()
+            Observable.interval(5000, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    viewModel.retrievePortfolioScreen()
+                }
         }
 
         viewModel.portfolioScreenDto.observe(viewLifecycleOwner, {

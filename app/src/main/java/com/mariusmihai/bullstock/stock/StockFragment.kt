@@ -20,7 +20,6 @@ import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.core.helpers.showAlertDialog
 import com.mariusmihai.bullstock.databinding.StockScreenBinding
 
-
 class StockFragment : BaseFragment<StockScreenBinding>() {
 
     //Here I have the stock that was clicked with StockMostImportantDataDto details in args.stockDetails
@@ -33,7 +32,11 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setChartStyle()
+
+        val values: ArrayList<Entry> = ArrayList()
+
+
+        setChartStyle(values)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,13 +59,13 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
         }
     }
 
-    fun setChartStyle() {
+    fun setChartStyle(values: ArrayList<Entry>) {
 
         // // Chart Style // //
         binding.stockChart.setBackgroundColor(Color.WHITE)
 
         // disable description text
-        binding.stockChart.getDescription().setEnabled(false)
+        binding.stockChart.description.isEnabled = false
 
         // enable touch gestures
         binding.stockChart.setTouchEnabled(true)
@@ -70,18 +73,9 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
         // set listeners
         binding.stockChart.setDrawGridBackground(false)
 
-        // create marker to display box when values are selected
-//        var mv = MyMarkerView(this, R.layout.custom_marker_view);
-
-        // Set the marker to the binding.stockChart
-//        mv.setChartView(binding.stockChart);
-//        binding.stockChart.setMarker(mv);
-
         // enable scaling and dragging
         binding.stockChart.isDragEnabled = true
         binding.stockChart.setScaleEnabled(true)
-        // binding.stockChart.setScaleXEnabled(true)
-        // binding.stockChart.setScaleYEnabled(true)
 
         // force pinch zoom along both axis
         binding.stockChart.setPinchZoom(true)
@@ -94,7 +88,7 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
         val yAxis = binding.stockChart.getAxisLeft()
 
         // disable dual axis (only use LEFT axis)
-        binding.stockChart.getAxisRight().setEnabled(false)
+        binding.stockChart.axisRight.isEnabled = false
 
         // horizontal grid lines
         yAxis.enableGridDashedLine(10f, 10f, 0f)
@@ -103,24 +97,21 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
         yAxis.setAxisMaximum(200f)
         yAxis.setAxisMinimum(-50f)
 
-        val llXAxis = LimitLine(9f, "Index 10");
+        val llXAxis = LimitLine(9f);
         llXAxis.setLineWidth(4f);
         llXAxis.enableDashedLine(10f, 10f, 0f);
-        llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
         llXAxis.setTextSize(10f);
 //        llXAxis.setTypeface(tfRegular);
 
-        val ll1 = LimitLine(150f, "Upper Limit");
+        val ll1 = LimitLine(150f);
         ll1.setLineWidth(4f);
         ll1.enableDashedLine(10f, 10f, 0f);
-        ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
         ll1.setTextSize(10f);
 //        ll1.setTypeface(tfRegular);
 
-        val ll2 = LimitLine(-30f, "Lower Limit");
+        val ll2 = LimitLine(-30f);
         ll2.setLineWidth(4f);
         ll2.enableDashedLine(10f, 10f, 0f);
-        ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
         ll2.setTextSize(10f);
 //        ll2.setTypeface(tfRegular);
 
@@ -129,41 +120,32 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
         xAxis.setDrawLimitLinesBehindData(true);
 
         // add limit lines
-        yAxis.addLimitLine(ll1);
-        yAxis.addLimitLine(ll2);
+//        yAxis.addLimitLine(ll1);
+//        yAxis.addLimitLine(ll2);
         //xAxis.addLimitLine(llXAxis);
 
-        setData(45, 180f)
+        setData(values)
 
         // draw points over time
         binding.stockChart.animateX(1500);
 
-        // get the legend (only possible after setting data)
-        val l = binding.stockChart.getLegend()
-
-        // draw legend entries as lines
-        l.setForm(Legend.LegendForm.LINE);
     }
 
-    private fun setData(count: Int, range: Float) {
-        val values: ArrayList<Entry> = ArrayList()
-        for (i in 0 until count) {
-            val `val` = (Math.random() * range).toFloat() - 30
-            values.add(Entry(i.toFloat(), `val`))
-        }
+    private fun setData(values: ArrayList<Entry>) {
+
         val set1: LineDataSet
         if (binding.stockChart.getData() != null &&
-            binding.stockChart.getData().getDataSetCount() > 0
+            binding.stockChart.getData().dataSetCount > 0
         ) {
-            set1 = binding.stockChart.getData().getDataSetByIndex(0) as LineDataSet
-            set1.setValues(values)
+            set1 = binding.stockChart.data.getDataSetByIndex(0) as LineDataSet
+            set1.values = values
             set1.notifyDataSetChanged()
-            binding.stockChart.getData().notifyDataChanged()
+            binding.stockChart.data.notifyDataChanged()
             binding.stockChart.notifyDataSetChanged()
         } else {
             // create a dataset and give it a type
-            set1 = LineDataSet(values, "DataSet 1")
-            set1.setDrawIcons(false)
+            set1 = LineDataSet(values, "")
+//            set1.setDrawIcons(false)
 
             // draw dashed line
             set1.enableDashedLine(10f, 5f, 0f)
@@ -179,11 +161,6 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
             // draw points as solid circles
             set1.setDrawCircleHole(false)
 
-            // customize legend entry
-            set1.formLineWidth = 1f
-            set1.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
-            set1.formSize = 15f
-
             // text size of values
             set1.valueTextSize = 9f
 
@@ -194,7 +171,7 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
             set1.setDrawFilled(true)
             set1.fillFormatter =
                 IFillFormatter { dataSet, dataProvider ->
-                    binding.stockChart.getAxisLeft().getAxisMinimum()
+                    binding.stockChart.axisLeft.axisMinimum
                 }
 
             // set color of filled area
@@ -208,7 +185,7 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
             val data = LineData(dataSets)
 
             // set data
-            binding.stockChart.setData(data)
+            binding.stockChart.data = data
         }
     }
 

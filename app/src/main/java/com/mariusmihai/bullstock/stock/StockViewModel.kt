@@ -1,6 +1,8 @@
 package com.mariusmihai.bullstock.stock
 
 import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mariusmihai.bullstock.core.helpers.StockChartPeriod
@@ -22,7 +24,7 @@ class StockViewModel : ViewModel() {
     val sharesOwned = ObservableField<String>()
     val stockName = ObservableField<String>()
     val isFavorite = ObservableField<Boolean>()
-    val chartData = ObservableField<List<StockChartResponse>>()
+    val chartData = MutableLiveData<MutableList<StockChartResponse>>()
 
     lateinit var stock: StockMostImportantDataDto
 
@@ -33,14 +35,14 @@ class StockViewModel : ViewModel() {
     fun retrieveStockData() =
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val request = StockChartRequest(stock.symbol, StockChartPeriod.ONE_DAY)
+                val request = StockChartRequest(stock.symbol, StockChartPeriod.ONE_MONTH)
 
                 val stockScreenDto = BullStockApiRepository.getStockScreen(request)
                 stockPrice.set(stockScreenDto.sharePrice.toString())
                 sharesOwned.set(stockScreenDto.sharesOwned.toString())
                 stockName.set(stockScreenDto.stockName)
                 isFavorite.set(stockScreenDto.favorite)
-                chartData.set(stockScreenDto.data)
+                chartData.postValue(stockScreenDto.data)
 
             } catch (e: Exception) {
                 e.message?.printMessage()

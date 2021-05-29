@@ -1,24 +1,27 @@
 package com.mariusmihai.bullstock.stock
 
 import android.graphics.Color
-import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
 import com.mariusmihai.bullstock.core.helpers.showAlertDialog
 import com.mariusmihai.bullstock.databinding.StockScreenBinding
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.util.*
+import kotlin.collections.ArrayList
 
 class StockFragment : BaseFragment<StockScreenBinding>() {
 
@@ -33,10 +36,19 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val values: ArrayList<Entry> = ArrayList()
+        viewModel.chartData.observe(viewLifecycleOwner, {
+            val values = ArrayList<Entry>()
 
-
-        setChartStyle(values)
+            for (elem in it) {
+                values.add(
+                    Entry(
+                        Date.from(Instant.parse(elem.period)).time.toFloat(),
+                        elem.price.toFloat()
+                    )
+                )
+            }
+            setChartStyle(values)
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,12 +92,17 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
         // force pinch zoom along both axis
         binding.stockChart.setPinchZoom(true)
 
-        val xAxis = binding.stockChart.getXAxis()
-
+        val xAxis = binding.stockChart.xAxis
+        xAxis.valueFormatter = object : DefaultAxisValueFormatter(0) {
+            override fun getFormattedValue(value: Float): String {
+                val dateFormat = SimpleDateFormat("dd MMM", Locale.US)
+                return dateFormat.format(value)
+            }
+        }
         // vertical grid lines
         xAxis.enableGridDashedLine(10f, 10f, 0f)
 
-        val yAxis = binding.stockChart.getAxisLeft()
+        val yAxis = binding.stockChart.axisLeft
 
         // disable dual axis (only use LEFT axis)
         binding.stockChart.axisRight.isEnabled = false
@@ -94,25 +111,26 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
         yAxis.enableGridDashedLine(10f, 10f, 0f)
 
         // axis range
-        yAxis.setAxisMaximum(200f)
-        yAxis.setAxisMinimum(-50f)
+//        yAxis.axisMaximum = values.maxOf { it.y }
+//        yAxis.axisMinimum = values.minOf { it.y }
 
         val llXAxis = LimitLine(9f);
-        llXAxis.setLineWidth(4f);
+
+        llXAxis.lineWidth = 4f;
         llXAxis.enableDashedLine(10f, 10f, 0f);
-        llXAxis.setTextSize(10f);
+        llXAxis.textSize = 10f;
 //        llXAxis.setTypeface(tfRegular);
 
         val ll1 = LimitLine(150f);
-        ll1.setLineWidth(4f);
+        ll1.lineWidth = 4f;
         ll1.enableDashedLine(10f, 10f, 0f);
-        ll1.setTextSize(10f);
+        ll1.textSize = 10f;
 //        ll1.setTypeface(tfRegular);
 
         val ll2 = LimitLine(-30f);
-        ll2.setLineWidth(4f);
+        ll2.lineWidth = 4f;
         ll2.enableDashedLine(10f, 10f, 0f);
-        ll2.setTextSize(10f);
+        ll2.textSize = 10f;
 //        ll2.setTypeface(tfRegular);
 
         // draw limit lines behind data instead of on top
@@ -134,8 +152,8 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
     private fun setData(values: ArrayList<Entry>) {
 
         val set1: LineDataSet
-        if (binding.stockChart.getData() != null &&
-            binding.stockChart.getData().dataSetCount > 0
+        if (binding.stockChart.data != null &&
+            binding.stockChart.data.dataSetCount > 0
         ) {
             set1 = binding.stockChart.data.getDataSetByIndex(0) as LineDataSet
             set1.values = values

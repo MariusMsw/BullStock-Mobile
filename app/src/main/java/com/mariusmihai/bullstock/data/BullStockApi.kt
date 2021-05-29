@@ -55,4 +55,6 @@ interface BullStockApi {
     @GET("stock/losers")
     suspend fun getLosers(): List<StockMostImportantDataDto>
 
+    suspend fun retrieveChartData(): Any
+
 }

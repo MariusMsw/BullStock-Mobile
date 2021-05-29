@@ -73,6 +73,8 @@ object BullStockApiRepository {
     suspend fun retrieveHistory() = bullStockApiWithAuth.retrieveHistory()
     suspend fun getPortfolioScreen() = bullStockApiWithAuth.getPortfolioScreen()
 
+    suspend fun retrieveChartData() = bullStockApiWithAuth.retrieveChartData()
+
     suspend fun changeFavoriteStatus(symbol: String) =
         bullStockApiWithAuth.changeFavoriteStatus(symbol)
 

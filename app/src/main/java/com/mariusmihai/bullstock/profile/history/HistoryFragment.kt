@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
+import com.mariusmihai.bullstock.core.helpers.showAlertDialog
 import com.mariusmihai.bullstock.databinding.FragmentHistoryBinding
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,14 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
 
         lifecycleScope.launch {
             viewModel.retrieveHistory()
+        }
+
+        viewModel.showAlert = { message ->
+            context?.showAlertDialog(
+                title = "",
+                message = message,
+                positiveButtonText = "Ok"
+            )
         }
 
         viewModel.historyDto.observe(viewLifecycleOwner, {

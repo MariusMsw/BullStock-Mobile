@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
+import com.mariusmihai.bullstock.core.helpers.showAlertDialog
 import com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto
 import com.mariusmihai.bullstock.databinding.FragmentPortofolioBinding
 import io.reactivex.Observable
@@ -30,6 +31,14 @@ class PortofolioFragment : BaseFragment<FragmentPortofolioBinding>() {
         adapter = PortfolioAdapter(
             mutableListOf()
         )
+
+        viewModel.showAlert = { message ->
+            context?.showAlertDialog(
+                title = "",
+                message = message,
+                positiveButtonText = "Ok"
+            )
+        }
 
         lifecycleScope.launch {
             viewModel.retrievePortfolioScreen()

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
+import com.mariusmihai.bullstock.core.helpers.showAlertDialog
 import com.mariusmihai.bullstock.databinding.FragmentFavoritesBinding
 import com.mariusmihai.bullstock.trading.adapters.StocksAdapter
 import io.reactivex.Observable
@@ -38,6 +39,14 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>() {
                 .subscribe {
                     viewModel.retrieveFavoriteStocks()
                 }
+        }
+
+        viewModel.showAlert = { message ->
+            context?.showAlertDialog(
+                title = "",
+                message = message,
+                positiveButtonText = "Ok"
+            )
         }
 
         viewModel.stockMostImportantData.observe(viewLifecycleOwner, {

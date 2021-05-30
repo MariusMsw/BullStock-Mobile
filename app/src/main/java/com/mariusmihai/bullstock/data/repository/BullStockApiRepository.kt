@@ -8,6 +8,7 @@ import com.mariusmihai.bullstock.data.dto.CashDto
 import com.mariusmihai.bullstock.data.dto.auth.LoginForm
 import com.mariusmihai.bullstock.data.dto.auth.RegisterForm
 import com.mariusmihai.bullstock.data.dto.stocks.StockChartRequest
+import com.mariusmihai.bullstock.data.dto.stocks.TradeStockDto
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -73,7 +74,8 @@ object BullStockApiRepository {
     suspend fun retrieveHistory() = bullStockApiWithAuth.retrieveHistory()
     suspend fun getPortfolioScreen() = bullStockApiWithAuth.getPortfolioScreen()
 
-    suspend fun retrieveChartData() = bullStockApiWithAuth.retrieveChartData()
+    suspend fun buyStock(request: TradeStockDto) = bullStockApiWithAuth.buyStock(request)
+    suspend fun sellStock(request: TradeStockDto) = bullStockApiWithAuth.sellStock(request)
 
     suspend fun changeFavoriteStatus(symbol: String) =
         bullStockApiWithAuth.changeFavoriteStatus(symbol)

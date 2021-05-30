@@ -25,7 +25,7 @@ class TopMovesViewModel : ViewModel() {
             } catch (e: Exception) {
                 e.message?.printMessage()
                 withContext(Dispatchers.Main) {
-                    showAlert?.invoke("An error has occurred. Please try again later.")
+                    showAlert?.invoke("Retrieve winners failed!")
                 }
             }
         }
@@ -38,7 +38,7 @@ class TopMovesViewModel : ViewModel() {
             } catch (e: Exception) {
                 e.message?.printMessage()
                 withContext(Dispatchers.Main) {
-                    showAlert?.invoke("An error has occurred. Please try again later.")
+                    showAlert?.invoke("Retrieve losers failed!")
                 }
             }
         }

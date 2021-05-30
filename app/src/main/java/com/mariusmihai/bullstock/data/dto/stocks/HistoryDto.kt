@@ -15,4 +15,5 @@ class HistoryDto(
     val transactionId: Int,
     val closeDate: Long,
     val closePrice: Double
+
 )

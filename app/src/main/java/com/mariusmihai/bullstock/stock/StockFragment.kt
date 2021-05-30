@@ -36,6 +36,14 @@ class StockFragment : BaseFragment<StockScreenBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.showAlert = { message ->
+            context?.showAlertDialog(
+                title = "",
+                message = message,
+                positiveButtonText = "Ok"
+            )
+        }
+
         viewModel.chartData.observe(viewLifecycleOwner, {
             val values = ArrayList<Entry>()
 

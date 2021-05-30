@@ -42,6 +42,12 @@ interface BullStockApi {
     @GET("/user/portofolio")
     suspend fun getPortfolioScreen(): MutableList<PortfolioScreenDto>
 
+    @POST("/user/stock-buy")
+    suspend fun buyStock(@Body request: TradeStockDto): Any
+
+    @POST("/user/stock-sell")
+    suspend fun sellStock(@Body request: TradeStockDto): Any
+
     // ******* Stocks *******
     @GET("stock")
     suspend fun getAllStocks(): MutableList<StockMostImportantDataDto>
@@ -55,6 +61,5 @@ interface BullStockApi {
     @GET("stock/losers")
     suspend fun getLosers(): List<StockMostImportantDataDto>
 
-    suspend fun retrieveChartData(): Any
 
 }

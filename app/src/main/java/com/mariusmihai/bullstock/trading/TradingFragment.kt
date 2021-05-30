@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.core.BaseFragment
+import com.mariusmihai.bullstock.core.helpers.showAlertDialog
 import com.mariusmihai.bullstock.databinding.FragmentTradingBinding
 import com.mariusmihai.bullstock.trading.adapters.TradingAdapter
 import com.mariusmihai.bullstock.trading.tabs.AllStocksFragment

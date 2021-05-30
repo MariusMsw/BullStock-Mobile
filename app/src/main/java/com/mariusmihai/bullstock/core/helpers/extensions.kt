@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.databinding.Observable
 
 fun EditText.closeOnDone() {
     setOnEditorActionListener { _, actionId, event ->
@@ -55,3 +56,11 @@ fun Context.showAlertDialog(
 
     alertDialogBuilder.create().show()
 }
+
+fun <T: Observable> T.addOnPropertyChanged(callback: (T) -> Unit) =
+    addOnPropertyChangedCallback(
+        object: Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(
+                observable: Observable?, i: Int) =
+                callback(observable as T)
+        })

@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.mariusmihai.bullstock.R
 import com.mariusmihai.bullstock.auth.AuthenticationActivity
 import com.mariusmihai.bullstock.core.BaseFragment
+import com.mariusmihai.bullstock.core.helpers.showAlertDialog
 import com.mariusmihai.bullstock.databinding.RegisterScreenBinding
 
 class RegisterFragment : BaseFragment<RegisterScreenBinding>() {
@@ -22,6 +23,14 @@ class RegisterFragment : BaseFragment<RegisterScreenBinding>() {
 
         binding.tvAlreadyHaveAccount.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+
+        viewModel.showAlert = { message ->
+            context?.showAlertDialog(
+                title = "",
+                message = message,
+                positiveButtonText = "Ok"
+            )
         }
 
         viewModel.navigateToLogin = {

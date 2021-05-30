@@ -21,19 +21,25 @@ class CashFragmentViewModel : ViewModel() {
         if (!depositString.get().isNullOrEmpty()) {
             val value = depositString.get()?.toDouble()
             if (value != null) {
-                if (value <= 1000) {
-                    viewModelScope.launch(Dispatchers.IO) {
-                        try {
-                            BullStockApiRepository.deposit(
-                                CashDto(
-                                    amount = value
-                                )
+                viewModelScope.launch(Dispatchers.IO) {
+                    if (value > 1000) {
+                        withContext(Dispatchers.Main) {
+                            showAlert?.invoke("Please deposit below 1000!")
+                        }
+                        depositString.set("")
+                        return@launch
+                    }
+                    try {
+                        BullStockApiRepository.deposit(
+                            CashDto(
+                                amount = value
                             )
-                        } catch (e: Exception) {
-                            e.message?.printMessage()
-                            withContext(Dispatchers.Main) {
-                                showAlert?.invoke("An error has occurred. Please try again later.")
-                            }
+                        )
+                        depositString.set("")
+                    } catch (e: Exception) {
+                        e.message?.printMessage()
+                        withContext(Dispatchers.Main) {
+                            showAlert?.invoke("Deposit failed!")
                         }
                     }
                 }
@@ -53,10 +59,12 @@ class CashFragmentViewModel : ViewModel() {
                                 amount = value
                             )
                         )
+                        withdrawString.set("")
                     } catch (e: Exception) {
                         e.message?.printMessage()
+                        withdrawString.set("")
                         withContext(Dispatchers.Main) {
-                            showAlert?.invoke("An error has occurred. Please try again later.")
+                            showAlert?.invoke("Not enough funds!")
                         }
                     }
                 }

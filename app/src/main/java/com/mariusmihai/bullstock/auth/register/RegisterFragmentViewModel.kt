@@ -8,6 +8,7 @@ import com.mariusmihai.bullstock.core.helpers.printMessage
 import com.mariusmihai.bullstock.data.dto.auth.RegisterForm
 import com.mariusmihai.bullstock.data.repository.BullStockApiRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -56,12 +57,14 @@ class RegisterFragmentViewModel : BaseViewModel() {
                     )
                 )
                 withContext(Dispatchers.Main) {
+                    showAlert?.invoke("Register successfully!")
+                    delay(5000)
                     navigateToLogin?.invoke()
                 }
             } catch (e: Exception) {
                 e.message?.printMessage()
                 withContext(Dispatchers.Main) {
-                    showAlert?.invoke("An error has occurred. Please try again later.")
+                    showAlert?.invoke("Could not register!")
                 }
             }
         }

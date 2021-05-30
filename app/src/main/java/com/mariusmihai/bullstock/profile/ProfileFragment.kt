@@ -41,6 +41,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             )
         }
 
+        viewModel.showAlert = { message ->
+            context?.showAlertDialog(
+                title = "",
+                message = message,
+                positiveButtonText = "Ok"
+            )
+        }
+
         viewModel.navigateToLogin = {
             startActivity(Intent(activity, AuthenticationActivity::class.java))
             activity?.finish()

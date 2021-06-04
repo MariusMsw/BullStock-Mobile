@@ -2,6 +2,7 @@ package com.mariusmihai.bullstock.trading.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mariusmihai.bullstock.R
@@ -66,6 +67,21 @@ class TopMovesStockAdapter(val items: MutableList<TopMovesData>) :
             binding.winnersConstraintLayout.setOnClickListener {
                 onStockClick?.invoke(model.model)
             }
+            if (model.model.priceChangeLastDay < 0) {
+                binding.winnersConstraintLayout.setBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.winnersConstraintLayout.context,
+                        android.R.color.holo_red_light
+                    )
+                )
+            } else {
+                binding.winnersConstraintLayout.setBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.winnersConstraintLayout.context,
+                        android.R.color.holo_green_light
+                    )
+                )
+            }
         }
     }
 
@@ -76,6 +92,24 @@ class TopMovesStockAdapter(val items: MutableList<TopMovesData>) :
             binding.model = model.model
             binding.losersConstraintLayout.setOnClickListener {
                 onStockClick?.invoke(model.model)
+            }
+            binding.losersConstraintLayout.setOnClickListener {
+                onStockClick?.invoke(model.model)
+            }
+            if (model.model.priceChangeLastDay < 0) {
+                binding.losersConstraintLayout.setBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.losersConstraintLayout.context,
+                        android.R.color.holo_red_light
+                    )
+                )
+            } else {
+                binding.losersConstraintLayout.setBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.losersConstraintLayout.context,
+                        android.R.color.holo_green_light
+                    )
+                )
             }
         }
     }

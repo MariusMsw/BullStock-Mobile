@@ -62,12 +62,6 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>() {
             )
         }
         binding.recyclerViewFavoriteStocks.adapter = adapter
-        binding.recyclerViewFavoriteStocks.addItemDecoration(
-            DividerItemDecoration(
-                binding.recyclerViewFavoriteStocks.context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
     }
 }

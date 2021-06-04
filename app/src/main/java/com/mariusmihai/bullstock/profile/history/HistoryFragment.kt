@@ -47,12 +47,6 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
         })
 
         binding.recyclerViewHistory.adapter = adapter
-        binding.recyclerViewHistory.addItemDecoration(
-            DividerItemDecoration(
-                binding.recyclerViewHistory.context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
         viewModel.back = {
             findNavController().popBackStack()

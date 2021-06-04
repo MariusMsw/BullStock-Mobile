@@ -72,12 +72,6 @@ class PortofolioFragment : BaseFragment<FragmentPortofolioBinding>() {
             )
         }
         binding.recyclerViewPortfolio.adapter = adapter
-        binding.recyclerViewPortfolio.addItemDecoration(
-            DividerItemDecoration(
-                binding.recyclerViewPortfolio.context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
     }
 }

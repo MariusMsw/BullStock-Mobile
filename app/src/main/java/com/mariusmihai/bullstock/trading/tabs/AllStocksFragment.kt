@@ -61,12 +61,6 @@ class AllStocksFragment : BaseFragment<FragmentAllStocksBinding>() {
             )
         }
         binding.recyclerViewAllStocks.adapter = adapter
-        binding.recyclerViewAllStocks.addItemDecoration(
-            DividerItemDecoration(
-                binding.recyclerViewAllStocks.context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
     }
 }

@@ -10,63 +10,76 @@
             type="com.mariusmihai.bullstock.data.dto.stocks.StockMostImportantDataDto" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_stocks_constraint_layout"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/padding_16"
+        android:layout_marginVertical="@dimen/padding_8"
+        app:cardCornerRadius="@dimen/padding_16">
 
-        <TextView
-            android:id="@+id/stock_symbol_tv"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_stocks_constraint_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:gravity="center"
-            android:text="@{model.symbol}"
-            app:layout_constraintEnd_toStartOf="@+id/stock_bid"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem" />
+            android:paddingHorizontal="@dimen/padding_8"
+            android:paddingVertical="@dimen/padding_8">
 
-        <TextView
-            android:id="@+id/stock_change_last_day"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:gravity="center"
-            android:text="@{String.valueOf(model.priceChangeLastDay) + `%`}"
-            app:layout_constraintEnd_toStartOf="@+id/stock_bid"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stock_symbol_tv"
-            tools:text="@tools:sample/lorem" />
+            <TextView
+                android:id="@+id/stock_symbol_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="@{model.symbol}"
+                app:layout_constraintEnd_toStartOf="@+id/stock_bid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem" />
 
-        <TextView
-            android:id="@+id/stock_bid"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/holo_red_light"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@{String.valueOf(model.bid)}"
-            app:layout_constraintEnd_toStartOf="@+id/stock_ask"
-            app:layout_constraintStart_toEndOf="@+id/stock_symbol_tv"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem" />
+            <TextView
+                android:id="@+id/stock_change_last_day"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="@{String.valueOf(model.priceChangeLastDay) + `%`}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/stock_bid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stock_symbol_tv"
+                tools:text="@tools:sample/lorem" />
 
-        <TextView
-            android:id="@+id/stock_ask"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/holo_green_light"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@{String.valueOf(model.ask)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/stock_bid"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem" />
+            <TextView
+                android:id="@+id/stock_bid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_red_rectangle_round"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@{String.valueOf(model.bid)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/stock_ask"
+                app:layout_constraintStart_toEndOf="@+id/stock_symbol_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/stock_ask"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_8"
+                android:layout_marginEnd="@dimen/padding_8"
+                android:background="@drawable/shape_green_rectangle_round"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@{String.valueOf(model.ask)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/stock_bid"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

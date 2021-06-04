@@ -54,12 +54,6 @@ class TopMovesFragment : BaseFragment<FragmentTopMovesBinding>() {
             )
         }
         binding.recyclerViewTopMoves.adapter = adapter
-        binding.recyclerViewTopMoves.addItemDecoration(
-            DividerItemDecoration(
-                binding.recyclerViewTopMoves.context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
     }
 }

@@ -16,6 +16,7 @@ class RegisterFragmentViewModel : BaseViewModel() {
 
     val email = ObservableField<String>()
     val password = ObservableField<String>()
+
     val confirmPassword = ObservableField<String>()
 
     var showAlert: ((String) -> Unit)? = null

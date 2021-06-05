@@ -59,6 +59,7 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="@dimen/padding_8"
+                android:singleLine="true"
                 android:text="@={viewModel.password}"
                 android:textColor="#7e7e7e"
                 android:textColorHint="#7e7e7e"
@@ -66,6 +67,35 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_email_register" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_64"
+                android:layout_marginTop="@dimen/padding_16"
+                android:layout_marginEnd="@dimen/padding_64"
+                android:indeterminate="false"
+                android:maxHeight="20dip"
+                android:minHeight="20dip"
+                android:progress="0"
+                app:layout_constraintEnd_toStartOf="@id/password_strength"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_password_register" />
+
+
+            <TextView
+                android:id="@+id/password_strength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/padding_32"
+                android:gravity="center_horizontal"
+                android:text="Weak"
+                app:layout_constraintBottom_toBottomOf="@id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_password_register" />
 
             <EditText
                 android:id="@+id/et_confirm_password_register"
@@ -83,7 +113,17 @@
                 android:theme="@android:style/Theme.Light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_password_register" />
+                app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
+            <TextView
+                android:id="@+id/login_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_16"
+                android:text="Your password must be at least 8 characters. With at least 1 number and 1 special character"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_confirm_password_register" />
 
             <Button
                 android:id="@+id/btn_register"
@@ -98,16 +138,16 @@
                 android:textSize="@dimen/text_size_16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_confirm_password_register" />
+                app:layout_constraintTop_toBottomOf="@+id/login_instructions" />
 
             <TextView
                 android:id="@+id/tv_already_have_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding_32"
+                android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:background="?attr/selectableItemBackground"
                 android:text="Already have an account? Click here"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
